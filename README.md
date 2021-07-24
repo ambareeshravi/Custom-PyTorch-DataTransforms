@@ -7,5 +7,5 @@ This module implements custom PyTorch data transforms to be used with images or 
 ```python3
 # Create objects of the transforms
 rand_channels = RandomizeChannels()
-pad_transform = PasteOnBlack()
+pad_transform = PasteImageOnBlack()
 ```
