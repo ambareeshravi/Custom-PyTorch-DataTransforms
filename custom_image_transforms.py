@@ -1,6 +1,6 @@
 '''
 Author: Ambareesh Ravi
-Description: Custom PyTorch Transform to pad black around images
+Description: Custom PyTorch Transforms for images or video frames
 Date: July 19,2020
 '''
 
@@ -35,3 +35,30 @@ class PasteImageOnBlack(object):
 
     def __repr__(self):
         return self.__class__.__name__ + '(%d, %d)'%(self.max_width, self.max_height)
+
+class RandomizeChannels(object):
+    '''
+    Randomly shuffles the channels of the input image
+    '''
+    def __init__(self, p):
+        self.channels = [0,1,2]
+        self.p = p # probability
+        self.items = list(range(int(1 / self.p)))
+        self.yes = self.items[:int(len(self.items) * self.p)]
+        
+    def __call__(self, image):
+        """
+        Args:
+            img (torch.Tensor): input image
+
+        Returns:
+            Tensor with rearranged channels
+        """
+        if np.random.choice(self.items) in self.yes:
+            np.random.shuffle(self.channels)
+            return image[self.channels]
+        else:
+            return image
+
+    def __repr__(self):
+        return self.__class__.__name__
