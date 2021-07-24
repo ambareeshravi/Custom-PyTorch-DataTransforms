@@ -6,7 +6,7 @@ Date: July 19,2020
 
 from PIL import Image, ImageOps
 
-class PasteOnBlack(object):
+class PasteImageOnBlack(object):
     '''
     Pastes the image on a black image
     Or pads an image with black around
